@@ -15,4 +15,9 @@ extern bool middleMouseDown, middleMousePress;
 extern bool scrollUp, scrollDown;
 extern int mouseX, mouseY;
 
+void GetController();
+extern int controllerPad;
+extern std::vector<int> controllerList;
+extern std::vector<int> controllerPressList;
+
 bool CheckMouseOnEntity(Vector2 position, int width, int height);

@@ -13,6 +13,9 @@ int main(int argc, char *argv[]) {
 	context = SDL_GL_CreateContext(displayWindow);
 	glOrtho(-SCREENWIDTH / 2, SCREENWIDTH / 2, SCREENHEIGHT / 2, -SCREENHEIGHT / 2, 0, 1);
 
+	SDL_Init(SDL_INIT_GAMECONTROLLER);
+	GetController();
+
 	while (isRunning) {
 		RemoveInitialPress();
 		while (SDL_PollEvent(&event)) {
