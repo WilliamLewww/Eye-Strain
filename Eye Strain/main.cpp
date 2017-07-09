@@ -1,7 +1,9 @@
 #include "main.h"
 
-void Update(int gameTime);
+void Update(int elapsedTime);
 void Render(SDL_Window* window, SDL_GLContext context);
+
+Joiner joiner;
 
 SDL_Event event;
 SDL_GLContext context;
@@ -9,7 +11,7 @@ SDL_GLContext context;
 bool isRunning = true;
 int frameStart, frameEnd, deltaTime = 0;
 int main(int argc, char *argv[]) {
-	displayWindow = SDL_CreateWindow("Lotion", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREENWIDTH, SCREENHEIGHT, SDL_WINDOW_OPENGL);
+	displayWindow = SDL_CreateWindow("Eye Strain", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREENWIDTH, SCREENHEIGHT, SDL_WINDOW_OPENGL);
 	context = SDL_GL_CreateContext(displayWindow);
 	glOrtho(-SCREENWIDTH / 2, SCREENWIDTH / 2, SCREENHEIGHT / 2, -SCREENHEIGHT / 2, 0, 1);
 
@@ -41,14 +43,16 @@ int main(int argc, char *argv[]) {
 	return 0;
 }
 
-void Update(int gameTime) {
-
+void Update(int elapsedTime) {
+	joiner.Update(elapsedTime);
 }
 
 void Render(SDL_Window* window, SDL_GLContext context) {
 	SDL_GL_MakeCurrent(window, context);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
+
+	joiner.Draw();
 
 	SDL_GL_SwapWindow(window);
 }
