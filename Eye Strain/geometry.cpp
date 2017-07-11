@@ -25,7 +25,7 @@ void DrawRect(Vector2 position, int width, int height) {
 	glEnd();
 }
 
-void DrawRect(Vector2 position, int width, int height, double color[3]) {
+void DrawRect(Vector2 position, int width, int height, int color[3]) {
 	Vector2 vectors[4]{
 		Vector2(0, 0),
 		Vector2(1, 0),
@@ -54,7 +54,7 @@ void DrawLine(Vector2 a, Vector2 b) {
 	glEnd();
 }
 
-void DrawLine(Vector2 a, Vector2 b, double color[3]) {
+void DrawLine(Vector2 a, Vector2 b, int color[3]) {
 	glBegin(GL_LINES);
 	glColor4f(color[0], color[1], color[2], 1);
 	glVertex2f(a.x - (SCREENWIDTH / 2), a.y - (SCREENHEIGHT / 2));
@@ -74,7 +74,7 @@ void DrawCircle(Vector2 position, float radius) {
 	glEnd();
 }
 
-void DrawCircle(Vector2 position, float radius, double color[3]) {
+void DrawCircle(Vector2 position, float radius, int color[3]) {
 	glBegin(GL_LINE_LOOP);
 	glColor4f(color[0], color[1], color[2], 1);
 

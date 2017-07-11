@@ -18,6 +18,8 @@ int main(int argc, char *argv[]) {
 	SDL_Init(SDL_INIT_GAMECONTROLLER);
 	GetController();
 
+	joiner.Initialize();
+
 	while (isRunning) {
 		RemoveInitialPress();
 		while (SDL_PollEvent(&event)) {
