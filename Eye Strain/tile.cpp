@@ -1,9 +1,15 @@
 #include "tile.h"
 
 std::vector<StaticTile> staticTileList;
-
 void InitializeStaticTiles() {
-	staticTileList.push_back(StaticTile(Vector2(500, 510)));
+	std::vector<StaticTile> tempStructure = ConvertToStatic(DeleteTile(GenerateBoxHollow(Vector2(0, 861), 8, 5, 8, 8),Vector2(56, 877)));
+	PrintTiles(GenerateBoxHollow(Vector2(0, 861), 8, 5, 8, 8));
+	staticTileList.insert(staticTileList.end(), tempStructure.begin(), tempStructure.end());
+
+	for (StaticTile& tile : staticTileList) {
+		int random[3] = { std::rand() % 255, std::rand() % 255, std::rand() % 255 };
+		tile.changeColor(random);
+	}
 }
 
 void DrawStaticTiles() {

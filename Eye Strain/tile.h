@@ -8,6 +8,9 @@ struct Tile {
 	int width, height;
 	int color[3];
 
+	Tile() { }
+	Tile(Vector2 newPosition) { position = newPosition; }
+
 	int operator==(const Tile& tile)const {
 		return (position.x == tile.position.x) && (position.y == tile.position.y);
 	}
@@ -20,8 +23,30 @@ struct Tile {
 	inline double right() { return position.x + width; }
 };
 
+struct StaticTile {
+	Tile tile;
+	StaticTile(Vector2 position) {
+		tile.position = position;
+
+		tile.width = 7;
+		tile.height = 7;
+
+		tile.color[0] = 150;
+		tile.color[1] = 100;
+		tile.color[2] = 200;
+	}
+
+	inline void changeColor(int color[3]) {
+		tile.color[0] = color[0];
+		tile.color[1] = color[1];
+		tile.color[2] = color[2];
+	}
+};
+extern std::vector<StaticTile> staticTileList;
+
+#include "structure.h"
+
 void DrawTile(Tile tile);
 
-#include "static_tile.h"
 void InitializeStaticTiles();
 void DrawStaticTiles();

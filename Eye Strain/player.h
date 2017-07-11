@@ -4,11 +4,12 @@
 #include "input.h"
 
 struct Player {
-	Vector2 position = Vector2(500, 500);
+	Vector2 position;
 	int width = 5, height = 5;
 	double velocityX, velocityY;
 
-	double jumpSpeed = 0.05;
+	double jumpSpeed = 0.045;
+	double speed = 50, runSpeed = 75;
 
 	bool onGround;
 

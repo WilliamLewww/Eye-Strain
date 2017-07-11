@@ -16,12 +16,24 @@ void UpdatePlayer(int elapsedTime) {
 	player.velocityX = 0;
 
 	switch (controllerPad) {
-		case 2: case 3: case 4: player.velocityX = 50 * deltaTimeS; break;
-		case 6: case 7: case 8: player.velocityX = -50 * deltaTimeS; break;
+		case 2: case 3: case 4: 
+			if (std::find(controllerList.begin(), controllerList.end(), SDL_CONTROLLER_BUTTON_X) != controllerList.end()) { player.velocityX = player.runSpeed * deltaTimeS; }
+			else { player.velocityX = player.speed * deltaTimeS; }
+
+			break;
+		case 6: case 7: case 8: 
+			if (std::find(controllerList.begin(), controllerList.end(), SDL_CONTROLLER_BUTTON_X) != controllerList.end()) { player.velocityX = -player.runSpeed * deltaTimeS; }
+			else { player.velocityX = -player.speed * deltaTimeS; }
+
+			break;
 	}
 
-	if (std::find(keyList.begin(), keyList.end(), SDLK_RIGHT) != keyList.end() && std::find(keyList.begin(), keyList.end(), SDLK_LEFT) == keyList.end()) player.velocityX = 50 * deltaTimeS;
-	if (std::find(keyList.begin(), keyList.end(), SDLK_LEFT) != keyList.end() && std::find(keyList.begin(), keyList.end(), SDLK_RIGHT) == keyList.end()) player.velocityX = -50 * deltaTimeS;
+	if (std::find(keyList.begin(), keyList.end(), SDLK_RIGHT) != keyList.end() && std::find(keyList.begin(), keyList.end(), SDLK_LEFT) == keyList.end()) {
+		if (std::find(keyList.begin(), keyList.end(), SDLK_LCTRL) != keyList.end()) { player.velocityX = player.runSpeed * deltaTimeS; } else { player.velocityX = player.speed * deltaTimeS; }
+	}
+	if (std::find(keyList.begin(), keyList.end(), SDLK_LEFT) != keyList.end() && std::find(keyList.begin(), keyList.end(), SDLK_RIGHT) == keyList.end()) {
+		if (std::find(keyList.begin(), keyList.end(), SDLK_LCTRL) != keyList.end()) { player.velocityX = -player.runSpeed * deltaTimeS; } else { player.velocityX = -player.speed * deltaTimeS; }
+	}
 
 	if (player.onGround == true) {
 		if (jumpPress == false) {

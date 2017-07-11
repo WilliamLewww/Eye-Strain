@@ -18,6 +18,7 @@ int main(int argc, char *argv[]) {
 	SDL_Init(SDL_INIT_GAMECONTROLLER);
 	GetController();
 
+	srand(time(NULL));
 	joiner.Initialize();
 
 	while (isRunning) {

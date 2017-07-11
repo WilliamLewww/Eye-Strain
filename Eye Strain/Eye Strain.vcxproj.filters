@@ -39,6 +39,9 @@
     <ClCompile Include="tile.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
+    <ClCompile Include="structure.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -62,7 +65,7 @@
     <ClInclude Include="tile.h">
       <Filter>Source Files\Environment</Filter>
     </ClInclude>
-    <ClInclude Include="static_tile.h">
+    <ClInclude Include="structure.h">
       <Filter>Source Files\Environment</Filter>
     </ClInclude>
   </ItemGroup>
