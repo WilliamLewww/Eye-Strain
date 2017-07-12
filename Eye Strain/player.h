@@ -5,7 +5,7 @@
 
 struct Player {
 	Vector2 position;
-	int width = 5, height = 5;
+	int width = 3, height = 3;
 	double velocityX, velocityY;
 
 	double jumpSpeed = 0.045;

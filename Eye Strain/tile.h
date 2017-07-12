@@ -28,8 +28,8 @@ struct StaticTile {
 	StaticTile(Vector2 position) {
 		tile.position = position;
 
-		tile.width = 7;
-		tile.height = 7;
+		tile.width = 5;
+		tile.height = 5;
 
 		tile.color[0] = 150;
 		tile.color[1] = 100;

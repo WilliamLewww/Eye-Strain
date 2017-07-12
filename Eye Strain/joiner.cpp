@@ -1,7 +1,7 @@
 #include "joiner.h"
 
 void Joiner::Initialize() {
-	player.position = Vector2(10, 870);
+	player.position = Vector2(10, 880);
 	InitializeStaticTiles();
 }
 

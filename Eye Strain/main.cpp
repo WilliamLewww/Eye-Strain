@@ -23,11 +23,15 @@ int main(int argc, char *argv[]) {
 
 	while (isRunning) {
 		RemoveInitialPress();
+		leftButtonPress = false;
+		middleMousePress = false;
+
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT)
 				isRunning = false;
 
 			GetKeys(event);
+			GetButtons(event);
 		}
 
 		if (deltaTime < 1 / 60) {
