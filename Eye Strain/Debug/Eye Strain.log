@@ -1,3 +1,22 @@
-﻿  tile.cpp
-  Eye Strain.vcxproj -> G:\Projects\Eye Strain\Debug\Eye Strain.exe
-  Eye Strain.vcxproj -> G:\Projects\Eye Strain\Debug\Eye Strain.pdb (Partial PDB)
+﻿  structure.cpp
+  Generating Code...
+  Compiling...
+  tile.cpp
+  player.cpp
+  main.cpp
+c:\users\williamlew\documents\projects\eye-strain\eye strain\main.cpp(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  joiner.cpp
+  geometry.cpp
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(37): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(52): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(53): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(59): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(60): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(61): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(79): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(118): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(119): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\williamlew\documents\projects\eye-strain\eye strain\geometry.cpp(120): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  Generating Code...
+  Eye Strain.vcxproj -> C:\Users\WilliamLew\Documents\Projects\Eye-Strain\Debug\Eye Strain.exe
+  Eye Strain.vcxproj -> C:\Users\WilliamLew\Documents\Projects\Eye-Strain\Debug\Eye Strain.pdb (Partial PDB)

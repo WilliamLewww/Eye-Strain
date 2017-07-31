@@ -1,0 +1,8 @@
+C:\Users\WilliamLew\Documents\Projects\Eye-Strain\SimpleEditor\bin\Debug\SimpleEditor.exe
+C:\Users\WilliamLew\Documents\Projects\Eye-Strain\SimpleEditor\bin\Debug\SimpleEditor.pdb
+C:\Users\WilliamLew\Documents\Projects\Eye-Strain\SimpleEditor\obj\Debug\SimpleEditor.csprojResolveAssemblyReference.cache
+C:\Users\WilliamLew\Documents\Projects\Eye-Strain\SimpleEditor\obj\Debug\SimpleEditor.Properties.Resources.resources
+C:\Users\WilliamLew\Documents\Projects\Eye-Strain\SimpleEditor\obj\Debug\SimpleEditor.csproj.GenerateResource.Cache
+C:\Users\WilliamLew\Documents\Projects\Eye-Strain\SimpleEditor\obj\Debug\SimpleEditor.exe
+C:\Users\WilliamLew\Documents\Projects\Eye-Strain\SimpleEditor\obj\Debug\SimpleEditor.pdb
+C:\Users\WilliamLew\Documents\Projects\Eye-Strain\SimpleEditor\obj\Debug\SimpleEditor.Form1.resources

@@ -2,6 +2,8 @@
 #include <vector>
 #include "tile.h"
 
+void GenerateStructureFromString(std::string data);
+
 std::vector<Tile> GenerateBox(Vector2 position, int width, int height, int tileWidth, int tileHeight);
 std::vector<Tile> GenerateBoxHollow(Vector2 position, int width, int height, int tileWidth, int tileHeight);
 
