@@ -6,6 +6,8 @@ namespace SimpleEditor {
         public Form1() {
             InitializeComponent();
 
+            checkBox1.CheckState = CheckState.Checked;
+
             Move += Form1_Move;
             Resize += Form1_Resize;
 
@@ -20,9 +22,7 @@ namespace SimpleEditor {
         };
 
         int mouseDrag = -1;
-        private void Form1_MouseUp(object sender, MouseEventArgs e) {
-            mouseDrag = -1;
-        }
+        private void Form1_MouseUp(object sender, MouseEventArgs e) { mouseDrag = -1; }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e) {
             if (tileMap != null && mouseDrag != -1) {
@@ -63,6 +63,11 @@ namespace SimpleEditor {
         int[,] tileMap;
         static int gridWidth = 800, gridHeight = 800, divisionX, divisionY;
         static int paddingX = 10, paddingY = 75;
+
+        private void checkBox1_CheckedChanged(object sender, System.EventArgs e) {
+            DrawTileMap();
+        }
+
         private void button1_Click(object sender, System.EventArgs e) {
             divisionX = (int)numericUpDown1.Value;
             divisionY = (int)numericUpDown2.Value;
@@ -100,7 +105,8 @@ namespace SimpleEditor {
         void DrawTileMap() {
             if (tileMap != null) {
                 CreateGraphics().Clear(Color.White);
-                GenerateGrid(gridWidth, gridHeight, divisionX, divisionY);
+                if (checkBox1.CheckState == CheckState.Checked)
+                    GenerateGrid(gridWidth, gridHeight, divisionX, divisionY);
 
                 for (int y = 0; y < tileMap.GetLength(1); y++) {
                     for (int x = 0; x < tileMap.GetLength(0); x++) {

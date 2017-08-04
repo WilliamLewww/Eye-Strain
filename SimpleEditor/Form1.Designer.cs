@@ -28,8 +28,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             this.SuspendLayout();
             // 
             // numericUpDown1
@@ -61,7 +64,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(290, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 69);
+            this.button1.Size = new System.Drawing.Size(117, 77);
             this.button1.TabIndex = 2;
             this.button1.Text = "Create Grid";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,23 +74,43 @@
             // 
             this.button2.Location = new System.Drawing.Point(413, 14);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 67);
+            this.button2.Size = new System.Drawing.Size(117, 75);
             this.button2.TabIndex = 3;
             this.button2.Text = "Create String";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 91);
+            this.textBox1.Location = new System.Drawing.Point(13, 95);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(517, 31);
             this.textBox1.TabIndex = 4;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(180, 53);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(84, 29);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "Grid";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(13, 50);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(131, 31);
+            this.numericUpDown3.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(549, 628);
+            this.Controls.Add(this.numericUpDown3);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -99,6 +122,7 @@
             this.Text = "Simple Editor";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,6 +135,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
     }
 }
 
