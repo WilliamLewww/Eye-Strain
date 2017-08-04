@@ -21,6 +21,12 @@ namespace SimpleEditor {
             RegularTile = 1 //Gray
         };
 
+        Color GetTileColor(int index) {
+            if (index == 1) return Color.Gray;
+            if (index == 2) return Color.Blue;
+            return Color.White;
+        }
+
         int mouseDrag = -1;
         private void Form1_MouseUp(object sender, MouseEventArgs e) { mouseDrag = -1; }
 
@@ -29,8 +35,8 @@ namespace SimpleEditor {
                 if (e.X < gridWidth + paddingX && e.X > paddingX && e.Y < gridHeight + paddingY && e.Y > paddingY) {
                     if (tileMap[(e.X - paddingX) / (gridWidth / tileMap.GetLength(0)), (e.Y - paddingY) / (gridHeight / tileMap.GetLength(1))] != mouseDrag) {
                         if (mouseDrag == 0) { GenerateTile((e.X - paddingX) / (gridWidth / divisionX) * (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY) * (gridHeight / divisionY), (gridWidth / divisionX), (gridHeight / divisionY), Color.White); }
-                        if (mouseDrag == 1) { GenerateTile((e.X - paddingX) / (gridWidth / divisionX) * (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY) * (gridHeight / divisionY), (gridWidth / divisionX), (gridHeight / divisionY), Color.Gray); }
-                        tileMap[(e.X - paddingX) / (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY)] = mouseDrag;
+                        else { GenerateTile((e.X - paddingX) / (gridWidth / divisionX) * (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY) * (gridHeight / divisionY), (gridWidth / divisionX), (gridHeight / divisionY), GetTileColor((int)numericUpDown3.Value)); }
+                            tileMap[(e.X - paddingX) / (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY)] = mouseDrag;
                     }
                 }
             }
@@ -39,10 +45,10 @@ namespace SimpleEditor {
         private void Form1_MouseDown(object sender, MouseEventArgs e) {
             if (tileMap != null) {
                 if (e.X < gridWidth + paddingX && e.X > paddingX && e.Y < gridHeight + paddingY && e.Y > paddingY) {
-                    if (tileMap[(e.X - paddingX) / (gridWidth / tileMap.GetLength(0)), (e.Y - paddingY) / (gridHeight / tileMap.GetLength(1))] == 0) {
-                        GenerateTile((e.X - paddingX) / (gridWidth / divisionX) * (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY) * (gridHeight / divisionY), (gridWidth / divisionX), (gridHeight / divisionY), Color.Gray);
-                        tileMap[(e.X - paddingX) / (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY)] = 1;
-                        mouseDrag = 1;
+                    if (tileMap[(e.X - paddingX) / (gridWidth / tileMap.GetLength(0)), (e.Y - paddingY) / (gridHeight / tileMap.GetLength(1))] != numericUpDown3.Value) {
+                        GenerateTile((e.X - paddingX) / (gridWidth / divisionX) * (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY) * (gridHeight / divisionY), (gridWidth / divisionX), (gridHeight / divisionY), GetTileColor((int)numericUpDown3.Value));
+                        tileMap[(e.X - paddingX) / (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY)] = (int)numericUpDown3.Value;
+                        mouseDrag = (int)numericUpDown3.Value;
                     }
                     else {
                         GenerateTile((e.X - paddingX) / (gridWidth / divisionX) * (gridWidth / divisionX), (e.Y - paddingY) / (gridHeight / divisionY) * (gridHeight / divisionY), (gridWidth / divisionX), (gridHeight / divisionY), Color.White);
@@ -111,6 +117,7 @@ namespace SimpleEditor {
                 for (int y = 0; y < tileMap.GetLength(1); y++) {
                     for (int x = 0; x < tileMap.GetLength(0); x++) {
                         if (tileMap[x, y] == 1) GenerateTile(x * (gridWidth / divisionX), y * (gridHeight / divisionY), (gridWidth / divisionX), (gridHeight / divisionY), Color.Gray);
+                        if (tileMap[x, y] == 2) GenerateTile(x * (gridWidth / divisionX), y * (gridHeight / divisionY), (gridWidth / divisionX), (gridHeight / divisionY), Color.Blue);
                     }
                 }
             }
