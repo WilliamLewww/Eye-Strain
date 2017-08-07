@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SimpleEditor {
@@ -15,6 +17,8 @@ namespace SimpleEditor {
             MouseMove += Form1_MouseMove;
             MouseUp += Form1_MouseUp;
         }
+
+        List<int[,]> structureList = new List<int[,]>();
 
         enum Tile : int {
             NoTile = 0, //White
@@ -68,10 +72,58 @@ namespace SimpleEditor {
 
         int[,] tileMap;
         static int gridWidth = 800, gridHeight = 800, divisionX, divisionY;
-        static int paddingX = 10, paddingY = 75;
+        static int paddingX = 10, paddingY = 120;
 
         private void checkBox1_CheckedChanged(object sender, System.EventArgs e) {
             DrawTileMap();
+        }
+
+        string savePath = "";
+        private void button2_Click(object sender, System.EventArgs e) {
+            folderBrowserDialog1.ShowDialog();
+            savePath = folderBrowserDialog1.SelectedPath;
+            savePath += "\\" + "output" + ".txt";
+
+            string output = textBox1.Text;
+            output += "|";
+            output += divisionX;
+            output += ",";
+            output += divisionY;
+            output += "|";
+
+            for (int x = 0; x < tileMap.GetLength(1); x++) {
+                for (int y = 0; y < tileMap.GetLength(0); y++) {
+                    if (tileMap[y, x] != 0) {
+                        output += y + "," + x + "," + tileMap[y, x] + "|";
+                    }
+                }
+            }
+
+            using (StreamWriter sw = File.CreateText(savePath)) {
+                sw.WriteLine(output);
+            }
+        }
+
+        private void button3_Click(object sender, System.EventArgs e) {
+            if (tileMap != null) {
+                int[,] tempTileMap = structureList[listBox1.SelectedIndex].Clone() as int[,];
+                tileMap = tempTileMap;
+                DrawTileMap();
+            }
+        }
+
+        private void button4_Click(object sender, System.EventArgs e) {
+            if (tileMap != null) {
+                if (listBox1.SelectedIndex != -1) {
+                    int[,] tempTileMap = tileMap.Clone() as int[,];
+                    structureList[listBox1.SelectedIndex] = tempTileMap;
+                }
+                else {
+                    int[,] tempTileMap = tileMap.Clone() as int[,];
+                    structureList.Add(tempTileMap);
+                    listBox1.Items.Add(textBox1.Text);
+                }
+            }
         }
 
         private void button1_Click(object sender, System.EventArgs e) {
