@@ -5,6 +5,22 @@ using System.Windows.Forms;
 
 namespace SimpleEditor {
     public partial class Form1 : Form {
+        List<int[,]> structureList = new List<int[,]>();
+        List<int[]> divisionList = new List<int[]>();
+        int[,] tileMap;
+
+        int previousSelectedIndex = -1;
+
+        static int gridWidth = 800, gridHeight = 800, divisionX, divisionY;
+        static int paddingX = 10, paddingY = 120;
+
+        string savePath = "";
+
+        enum Tile : int {
+            NoTile = 0, //White
+            RegularTile = 1 //Gray
+        };
+
         public Form1() {
             InitializeComponent();
 
@@ -17,13 +33,6 @@ namespace SimpleEditor {
             MouseMove += Form1_MouseMove;
             MouseUp += Form1_MouseUp;
         }
-
-        List<int[,]> structureList = new List<int[,]>();
-
-        enum Tile : int {
-            NoTile = 0, //White
-            RegularTile = 1 //Gray
-        };
 
         Color GetTileColor(int index) {
             if (index == 1) return Color.Gray;
@@ -70,43 +79,46 @@ namespace SimpleEditor {
             DrawTileMap();
         }
 
-        int[,] tileMap;
-        static int gridWidth = 800, gridHeight = 800, divisionX, divisionY;
-        static int paddingX = 10, paddingY = 120;
-
         private void checkBox1_CheckedChanged(object sender, System.EventArgs e) {
             DrawTileMap();
         }
 
-        string savePath = "";
         private void button2_Click(object sender, System.EventArgs e) {
             folderBrowserDialog1.ShowDialog();
             savePath = folderBrowserDialog1.SelectedPath;
             savePath += "\\" + "output" + ".txt";
 
-            string output = textBox1.Text;
-            output += "|";
-            output += divisionX;
-            output += ",";
-            output += divisionY;
-            output += "|";
-
-            for (int x = 0; x < tileMap.GetLength(1); x++) {
-                for (int y = 0; y < tileMap.GetLength(0); y++) {
-                    if (tileMap[y, x] != 0) {
-                        output += y + "," + x + "," + tileMap[y, x] + "|";
-                    }
-                }
-            }
-
+            string output;
+            int counter = 0;
             using (StreamWriter sw = File.CreateText(savePath)) {
-                sw.WriteLine(output);
+                foreach (int[,] structure in structureList) {
+                    output = listBox1.Items[counter].ToString();
+                    output += "|";
+                    output += divisionList[counter][0];
+                    output += ",";
+                    output += divisionList[counter][1];
+                    output += "|";
+
+                    for (int x = 0; x < structure.GetLength(1); x++) {
+                        for (int y = 0; y < structure.GetLength(0); y++) {
+                            if (structure[y, x] != 0) {
+                                output += y + "," + x + "," + structure[y, x] + "|";
+                            }
+                        }
+                    }
+
+                    sw.WriteLine(output);
+                    sw.WriteLine("");
+                    counter += 1;
+                }
             }
         }
 
         private void button3_Click(object sender, System.EventArgs e) {
-            if (tileMap != null) {
+            if (tileMap != null && listBox1.SelectedIndex != -1) {
                 int[,] tempTileMap = structureList[listBox1.SelectedIndex].Clone() as int[,];
+                divisionX = divisionList[listBox1.SelectedIndex][0];
+                divisionY = divisionList[listBox1.SelectedIndex][1];
                 tileMap = tempTileMap;
                 DrawTileMap();
             }
@@ -117,13 +129,32 @@ namespace SimpleEditor {
                 if (listBox1.SelectedIndex != -1) {
                     int[,] tempTileMap = tileMap.Clone() as int[,];
                     structureList[listBox1.SelectedIndex] = tempTileMap;
+                    divisionList.Add(new int[2] { divisionX, divisionY });
                 }
                 else {
                     int[,] tempTileMap = tileMap.Clone() as int[,];
                     structureList.Add(tempTileMap);
+                    divisionList.Add(new int[2]{ divisionX, divisionY });
                     listBox1.Items.Add(textBox1.Text);
                 }
             }
+        }
+
+        private void button5_Click(object sender, System.EventArgs e) {
+            if (listBox1.SelectedIndex != -1) {
+                structureList.RemoveAt(listBox1.SelectedIndex);
+                divisionList.RemoveAt(listBox1.SelectedIndex);
+                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            }
+        }
+
+        private void button6_Click(object sender, System.EventArgs e) {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, System.EventArgs e) {
+            if (previousSelectedIndex == listBox1.SelectedIndex && listBox1.SelectedIndex != -1) { listBox1.SelectedIndex = -1; }
+            else { previousSelectedIndex = listBox1.SelectedIndex; }
         }
 
         private void button1_Click(object sender, System.EventArgs e) {
