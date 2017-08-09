@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
 namespace SimpleEditor {
     public partial class Form1 : Form {
+        List<string> stringList = new List<string>();
+
         List<int[,]> structureList = new List<int[,]>();
         List<int[]> divisionList = new List<int[]>();
         int[,] tileMap;
@@ -108,17 +111,18 @@ namespace SimpleEditor {
                     }
 
                     sw.WriteLine(output);
-                    sw.WriteLine("");
                     counter += 1;
                 }
             }
         }
 
         private void button3_Click(object sender, System.EventArgs e) {
-            if (tileMap != null && listBox1.SelectedIndex != -1) {
+            if (listBox1.SelectedIndex != -1) {
                 int[,] tempTileMap = structureList[listBox1.SelectedIndex].Clone() as int[,];
                 divisionX = divisionList[listBox1.SelectedIndex][0];
                 divisionY = divisionList[listBox1.SelectedIndex][1];
+                numericUpDown1.Value = divisionX;
+                numericUpDown2.Value = divisionY;
                 tileMap = tempTileMap;
                 DrawTileMap();
             }
@@ -149,7 +153,42 @@ namespace SimpleEditor {
         }
 
         private void button6_Click(object sender, System.EventArgs e) {
+            openFileDialog1.Filter = "Text Files (*.txt)|*.txt";
+            openFileDialog1.InitialDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+            openFileDialog1.ShowDialog();
 
+            if (openFileDialog1.FileName.Substring(openFileDialog1.FileName.LastIndexOf('.')).Equals(".txt")) {
+                savePath = openFileDialog1.FileName;
+
+                using (StreamReader sr = File.OpenText(openFileDialog1.FileName)) {
+                    stringList.Clear();
+                    string s = "";
+                    while ((s = sr.ReadLine()) != null) {
+                        stringList.Add(s);
+                    }
+                }
+            }
+
+            structureList.Clear();
+            divisionList.Clear();
+            listBox1.Items.Clear();
+
+            string[] tempString;
+            int[,] tempTileMap;
+            foreach (string structureString in stringList) {
+                tempString = structureString.Split('|');
+                listBox1.Items.Add(tempString[0]);
+                divisionList.Add(new int[] { Int32.Parse(tempString[1].Split(',')[0]), Int32.Parse(tempString[1].Split(',')[1]) });
+                tempTileMap = new int[Int32.Parse(tempString[1].Split(',')[0]), Int32.Parse(tempString[1].Split(',')[1])];
+
+                for (int x = 2; x < tempString.Length - 1; x++) {
+                    tempTileMap[Int32.Parse(tempString[x].Split(',')[0]), Int32.Parse(tempString[x].Split(',')[1])] = Int32.Parse(tempString[x].Split(',')[2]);
+                }
+
+                structureList.Add(tempTileMap);
+            }
+
+            stringList.Clear();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, System.EventArgs e) {
@@ -193,6 +232,7 @@ namespace SimpleEditor {
 
         void DrawTileMap() {
             if (tileMap != null) {
+                ResizeWindow();
                 CreateGraphics().Clear(Color.White);
                 if (checkBox1.CheckState == CheckState.Checked)
                     GenerateGrid(gridWidth, gridHeight, divisionX, divisionY);
